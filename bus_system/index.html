@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bus Stop App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <h1>Bus Stop Application</h1>
+          <div class="sub"></div>
+        </div>
+        <div class="pill">
+          <span>Station:</span> <strong id="stationPill">—</strong>
+          <span class="muted">|</span>
+          <span>Bus:</span> <strong id="busPill">—</strong>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- LEFT -->
+        <div class="card">
+          <h2>Live Bus Status</h2>
+
+          <div class="row">
+            <div class="field">
+              <label>From (Station)</label>
+              <select id="stationSelect"></select>
+            </div>
+            <div class="field">
+              <label>To (Destination)</label>
+              <select id="destinationSelect"></select>
+            </div>
+            <div class="field">
+              <label>Bus Number</label>
+              <select id="busSelect"></select>
+            </div>
+          </div>
+
+          <div class="eta">
+            <!-- Estimated Time of Arrival(ETA) -->
+            <div class="etaBox">
+              <div class="big"><span id="etaMins">--</span> min</div>
+              <div class="small">Next bus arrival estimate (ETA)</div>
+            </div>
+
+            <div class="badges">
+              <span class="badge" id="peakBadge">Off-peak</span>
+              <span class="badge" id="seniorBadge" style="display: none"
+                >Senior Free Sunday</span
+              >
+            </div>
+
+            <div class="alerts">
+              <div class="alert ok" id="onTimeBox">
+                <div class="t">On Time</div>
+                <div class="d">No delays right now.</div>
+              </div>
+
+              <div class="alert warn" id="delayBox" style="display: none">
+                <div class="t">Bus Delay</div>
+                <div class="d" id="delayText">Delay info…</div>
+              </div>
+
+              <div class="alert bad" id="errorBox" style="display: none">
+                <div class="t">Error</div>
+                <div class="d" id="errorText">Something went wrong.</div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="sep" />
+
+          <h2>Book Ticket</h2>
+
+          <div class="row">
+            <div class="field">
+              <label>Ticket Type</label>
+              <select id="ticketType">
+                <option value="standard">Standard</option>
+                <option value="student">Student</option>
+                <option value="senior">Senior</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Quantity</label>
+              <input id="qty" type="number" min="1" value="1" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label>Calculated Price</label>
+              <input id="price" type="text" readonly />
+            </div>
+
+            <div class="field">
+              <label>Seat Availability</label>
+              <input id="seats" type="text" readonly />
+            </div>
+          </div>
+
+          <div class="btns">
+            <button id="bookBtn">Book Ticket</button>
+            <button class="secondary" id="refreshBtn">Refresh ETA</button>
+          </div>
+
+          <div class="note">
+            Notes: ETA/delay demo simulated. Real system me API/GPS se ETA
+            aayegi.
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="card">
+          <h2>My Tickets</h2>
+          <div class="sub">
+            Tickets are saved in your browser (localStorage).
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Ticket</th>
+                <th>Route</th>
+                <th class="right">Price</th>
+                <th class="right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="ticketRows">
+              <tr>
+                <td colspan="4" class="muted">No tickets yet.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="btns mt">
+            <button class="secondary" id="clearAllBtn">
+              Clear All Tickets
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toasts" id="toasts"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
